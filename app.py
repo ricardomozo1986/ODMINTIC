@@ -50,7 +50,8 @@ def evaluar_calidad_interoperabilidad(df, uploaded_file):
     else:
         resultados["Actualización"] = "No aplica"
 
-    portabilidad = 100 if all(df.columns.str.replace(" ", "").str.isidentifier()) else 50
+    # --- LÍNEA CORREGIDA ---
+    portabilidad = 100 if all(col.replace(" ", "").isidentifier() for col in df.columns) else 50
     resultados["Portabilidad"] = portabilidad
 
     nombres_claros = sum(df.columns.str.len() > 3)
